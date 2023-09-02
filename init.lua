@@ -374,8 +374,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 
 -- This keymap is currently used to switch to NvimTree explorer
--- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>qf', vim.diagnostic.open_float, { desc = 'Open [f]loating diagnostic message' })
+vim.keymap.set('n', '<leader>ql', vim.diagnostic.setloclist, { desc = 'Open diagnostics [l]ist' })
 
 -- Make CTRL-/ comment a line, like VS Code
 vim.keymap.set('n', '<C-/>', 'gcc', { desc = 'Comment the current line' })

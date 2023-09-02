@@ -24,9 +24,16 @@ vim.keymap.set('n', '<C-l>', '<C-W>l')
 
 local function custom_on_attach(bufnr)
 	local api = require "nvim-tree.api"
+	local function opts(desc)
+		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+	end
 
 	-- default mappings
 	api.config.mappings.default_on_attach(bufnr)
+
+	-- custom mappings
+	vim.keymap.set('n', 'v', api.node.open.vertical, opts("Open: [V]ertical split open"))
+	vim.keymap.set('n', 't', api.node.open.horizontal, opts("Open: [T]op split open"))
 end
 
 return {
@@ -38,8 +45,9 @@ return {
 	},
 	keys = {
 		-- If the tree is closed, open it and focus it. Otherwise just focus
-		{ "<leader>e", ":NvimTreeFocus<CR>",    desc = "NvimTree [e]xplorer" },
-		{ "<leader>f", ":NvimTreeFindFile<CR>", desc = "NvimTree [f]ind file" },
+		{ "<leader>e", ":NvimTreeFocus<CR>", desc = "NvimTree: [e]xplorer" },
+		-- TODO: This finder doesn't work. Use Telescope file search instead `<leader>sf`
+		-- { "<leader>f", ":NvimTreeFindFile",  desc = "NvimTree: [f]ind file" },
 	},
 	config = function()
 		require("nvim-tree").setup {
