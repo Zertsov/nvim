@@ -46,8 +46,6 @@ return {
 	keys = {
 		-- If the tree is closed, open it and focus it. Otherwise just focus
 		{ "<leader>e", ":NvimTreeFocus<CR>", desc = "NvimTree: [e]xplorer" },
-		-- TODO: This finder doesn't work. Use Telescope file search instead `<leader>sf`
-		-- { "<leader>f", ":NvimTreeFindFile",  desc = "NvimTree: [f]ind file" },
 	},
 	config = function()
 		require("nvim-tree").setup {
@@ -56,6 +54,19 @@ return {
 			filters = {
 				dotfiles = false
 			},
+			view = {
+				adaptive_size = true,
+				number = true,
+				relativenumber = true,
+			},
+			renderer = {
+				highlight_opened_files = "all",
+			},
+			-- For some reason this isn't working and is listed as an unkown option.
+			-- update_focused_file = {
+			-- 	enabled = true,
+			-- 	update_root = false,
+			-- },
 		}
 	end,
 }
