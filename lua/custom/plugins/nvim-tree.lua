@@ -63,10 +63,11 @@ return {
 				highlight_opened_files = "all",
 			},
 			-- For some reason this isn't working and is listed as an unkown option.
-			-- update_focused_file = {
-			-- 	enabled = true,
-			-- 	update_root = false,
-			-- },
+			update_focused_file = {
+				enable = true,
+				update_root = true,
+				ignore_list = {},
+			},
 		}
 	end,
 }
