@@ -193,6 +193,13 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- If a file changes from outside the buffer, auto reload it.
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -264,6 +271,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('telescope').setup {
   defaults = {
     mappings = {
+      n = {
+        ['<C-d>'] = require('telescope.actions').delete_buffer
+      },
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
@@ -288,6 +298,8 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 -- live_grep works like {ctrl,cmd}+shift+f
+-- NOTE: You need to have ripgrep installed on your machine for this to work, or change vim config to use
+--       a different grep tool.
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').live_grep, { desc = '[S]earch [S]tring' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
